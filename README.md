@@ -154,3 +154,9 @@ The dataset input to the evaluate should be using the test split, like in the ex
 IMPORTANT: 
 - If you use this code to run on the test set, not to correct actual draft, then you should use the generated corrupted dataset and `draft_summaries=None`.
 - If you use this code to correct actual draft from BART, then you should use the actual SAMSum/DialogSum dataset and `draft_summaries=draft_summaries`
+
+# Reference
+
+- [Huggingface Transformers](https://github.com/huggingface/transformers)
+- [JointBERT](https://github.com/monologg/JointBERT)
+- [BARTScore](https://github.com/neulab/BARTScore)
