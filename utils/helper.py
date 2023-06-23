@@ -5,6 +5,76 @@ from utils.labels_tags import label_map
 
 nlp = spacy.load('en_core_web_lg')
 
+def update_labels(labels, label_type, start_idx, end_idx, new_token):
+    new_labels = []
+    token_length = len(new_token.split())
+    for i in range(len(labels)):
+        if i < start_idx:
+            new_labels.append(labels[i])
+        elif i == start_idx:
+            new_labels.append(f"B-{label_type}")
+            for _ in range(1, token_length):
+                new_labels.append(f"I-{label_type}")
+        elif i > start_idx and i < end_idx:
+            continue
+        else:
+            new_labels.append(labels[i])
+
+    return new_labels
+
+def add_labels(labels, label_type, end_idx, new_token):
+    new_labels = []
+    token_length = len(new_token.split())
+    for i in range(len(labels)):
+        if i < end_idx:
+            new_labels.append(labels[i])
+        elif i == end_idx:
+            new_labels.append("O")
+            new_labels.append(f"B-{label_type}")
+            for _ in range(1, token_length):
+                new_labels.append(f"I-{label_type}")
+        else:
+            new_labels.append(labels[i])
+
+    return new_labels
+
+def align_distortion_map(distortion_map, end_idx, added_length):
+    for dmap in distortion_map:
+        if dmap["start_idx"] >= end_idx:
+            dmap["start_idx"] += added_length
+            dmap["end_idx"] += added_length
+    return distortion_map
+
+def extract_digits(num):
+    num_ = None
+    if num.text.isdigit():
+        num_ = int(num.text)
+    else:
+        num_= int(''.join(filter(str.isdigit, num.text)))
+    
+    return num_
+
+def extract_digits_str(num):
+    num_ = None
+    if num.isdigit():
+        num_ = int(num)
+    else:
+        num_= int(''.join(filter(str.isdigit, num)))
+    
+    return num_
+
+def is_match_case(a, b):
+    if a == b:  # check if strings are equal
+        return True
+    elif a.isupper() and b.isupper():
+        return True
+    elif a.islower() and b.islower():
+        return True
+    elif a[0].isupper() and a[1:].islower() and b[0].isupper() and b[1:].islower():
+        return True
+    else:
+        return False
+
 def remove_spaces_and_lower(str1):
     # Remove all types of whitespaces and convert both strings to lowercase
     return re.sub(r'\s', '', str1).lower()
