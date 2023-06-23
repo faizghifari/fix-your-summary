@@ -1,0 +1,14 @@
+transformers
+datasets
+sentencepiece
+evaluate
+numpy
+spacy
+pyinflect
+protobuf
+rouge-score
+bert-score
+seqeval
+nltk
+py7zr
+torch >= 1.3
