@@ -136,3 +136,9 @@ model/
 
 # logs
 logs/
+
+# data
+data/
+
+llms/
+img/
