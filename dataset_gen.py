@@ -71,7 +71,7 @@ def create_data_point(data, distort, split):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("--corrupted_data_ratio", type=int, required=True,
+    parser.add_argument("--corrupted_data_ratio", type=float, default=0.5,
                     help="Corrupted data ratio")
 
     parser.add_argument("--max_len", type=int, default=512,

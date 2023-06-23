@@ -89,16 +89,9 @@ def generate_json_data(output_dir, dataset):
                                             }
                                             print(json.dumps(tag_comb_json_data), file=tcf)
 
-                                            tag_comb_input_str = f"{dialogue} </s></s> {summary_with_tags_comb}"
-                                            tag_comb_json_data = {
-                                                "src": tag_comb_input_str,
-                                                "tgt": data["ref_summaries"],
-                                            }
-                                            print(json.dumps(tag_comb_json_data), file=tcf)
-
                                             list_input_str = f"{weak_prompt} </s></s> Word List: {word_list} </s></s> Draft Summary: {distorted_summaries} </s></s> Dialogue Context: {dialogue}"
                                             list_json_data = {
                                                 "src": list_input_str,
                                                 "tgt": data["ref_summaries"],
                                             }
-                                            print(json.dumps(list_json_data), file=tcf)
+                                            print(json.dumps(list_json_data), file=lf)
